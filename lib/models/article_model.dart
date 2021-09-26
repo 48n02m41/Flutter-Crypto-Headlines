@@ -1,23 +1,23 @@
 class ArticleModel {
-  final String? author;
-  final String? title;
-  final String? description;
-  final String? url;
-  final String? urlToImage;
-  final String? publishedAt;
-  final String? content;
+  final String author;
+  final String title;
+  final String description;
+  final String url;
+  final String urlToImage;
+  final String publishedAt;
+  final String content;
   //final List<String> source;
 
   ArticleModel(
-      {this.author,
-      this.title,
-      this.description,
-      this.url,
-      this.urlToImage,
-      this.publishedAt,
-      this.content});
+      {required this.author,
+      required this.title,
+      required this.description,
+      required this.url,
+      required this.urlToImage,
+      required this.publishedAt,
+      required this.content});
 
-  factory ArticleModel.fromJson(Map<dynamic, dynamic> json) {
+  factory ArticleModel.fromJson(Map<String, dynamic> json) {
     return ArticleModel(
       author: json['author'] ?? '',
       title: json['title'] ?? '',

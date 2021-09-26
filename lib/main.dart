@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
                       return ListView.builder(
                         itemCount: data.result.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Text(data.result[index].title ?? '');
+                          return Text(data.result[index].title);
                         },
                       );
                     } else {
