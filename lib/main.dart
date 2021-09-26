@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
-// State
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
 
@@ -25,14 +24,19 @@ class MyApp extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 child: Consumer<ArticleDataProvider>(
                   builder: (context, data, child) {
-                    if (data.result == null || data.loading == false) {
-                      //print(data.result);
-                      return const Text(
-                          'Data successfully loaded. Placeholder.');
+                    if (data.result.isNotEmpty && data.loading == false) {
+                      //print(data.result.runtimeType);
+                      // return const Text(
+                      //     'Data successfully loaded. Placeholder.');
+                      return ListView.builder(
+                        itemCount: data.result.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Text(data.result[index].title ?? '');
+                        },
+                      );
                     } else {
                       return const Text('Loading Data');
                     }
-                    // return Text('Placeholder');
                   },
                 ),
               ))),
