@@ -17,6 +17,10 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<ArticleDataProvider>(
       create: (context) => articleDataProvider,
       child: MaterialApp(
+          theme: ThemeData(
+            brightness: Brightness.dark,
+            primaryColor: Colors.indigo,
+          ),
           debugShowCheckedModeBanner: false,
           home: Scaffold(
               appBar: AppBar(title: const Text('CryptoHeadlines')),
