@@ -31,15 +31,22 @@ class MyApp extends StatelessWidget {
                           // return Text(data.result[index].title);
                           return Center(
                             child: Card(
-                              child: ListTile(
-                                leading: Image.network(
-                                  data.result[index].urlToImage,
-                                  errorBuilder:
-                                      (context, exception, stackTrack) =>
-                                          const Icon(Icons.error),
-                                ),
-                                title: Text(data.result[index].title),
-                                subtitle: Text(data.result[index].description),
+                              clipBehavior: Clip.antiAlias,
+                              child: Column(
+                                children: [
+                                  Image.network(
+                                    data.result[index].urlToImage,
+                                    errorBuilder:
+                                        (context, exception, stackTrack) =>
+                                            const Icon(Icons.error),
+                                    isAntiAlias: true,
+                                  ),
+                                  ListTile(
+                                    title: Text(data.result[index].title),
+                                    subtitle:
+                                        Text(data.result[index].description),
+                                  ),
+                                ],
                               ),
                             ),
                           );
