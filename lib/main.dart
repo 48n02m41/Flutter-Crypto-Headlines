@@ -25,13 +25,24 @@ class MyApp extends StatelessWidget {
                 child: Consumer<ArticleDataProvider>(
                   builder: (context, data, child) {
                     if (data.result.isNotEmpty && data.loading == false) {
-                      //print(data.result.runtimeType);
-                      // return const Text(
-                      //     'Data successfully loaded. Placeholder.');
                       return ListView.builder(
                         itemCount: data.result.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Text(data.result[index].title);
+                          // return Text(data.result[index].title);
+                          return Center(
+                            child: Card(
+                              child: ListTile(
+                                leading: Image.network(
+                                  data.result[index].urlToImage,
+                                  errorBuilder:
+                                      (context, exception, stackTrack) =>
+                                          const Icon(Icons.error),
+                                ),
+                                title: Text(data.result[index].title),
+                                subtitle: Text(data.result[index].description),
+                              ),
+                            ),
+                          );
                         },
                       );
                     } else {
