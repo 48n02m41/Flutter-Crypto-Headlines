@@ -15,53 +15,49 @@ class MyApp extends StatelessWidget {
     articleDataProvider.getArticleData(context); // launch GET request.
 
     return ChangeNotifierProvider<ArticleDataProvider>(
-      create: (context) => articleDataProvider,
-      child: MaterialApp(
-          theme: ThemeData(
-            brightness: Brightness.dark,
-            primaryColor: Colors.indigo,
-          ),
-          debugShowCheckedModeBanner: false,
-          home: Scaffold(
-              appBar: AppBar(title: const Text('CryptoHeadlines')),
-              body: Container(
-                padding: const EdgeInsets.all(16),
-                child: Consumer<ArticleDataProvider>(
-                  builder: (context, data, child) {
-                    if (data.result.isNotEmpty && data.loading == false) {
-                      return ListView.builder(
-                        itemCount: data.result.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          // return Text(data.result[index].title);
-                          return Center(
-                            child: Card(
-                              clipBehavior: Clip.antiAlias,
-                              child: Column(
-                                children: [
-                                  Image.network(
-                                    data.result[index].urlToImage,
-                                    errorBuilder:
-                                        (context, exception, stackTrack) =>
-                                            const Icon(Icons.error),
-                                    isAntiAlias: true,
-                                  ),
-                                  ListTile(
-                                    title: Text(data.result[index].title),
-                                    subtitle:
-                                        Text(data.result[index].description),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    } else {
-                      return const Text('Loading Data');
-                    }
-                  },
-                ),
-              ))),
-    );
+        create: (context) => articleDataProvider,
+        child: MaterialApp(
+            theme: ThemeData(
+              brightness: Brightness.dark,
+              primaryColor: Colors.indigo,
+            ),
+            debugShowCheckedModeBanner: false,
+            home: Scaffold(
+                appBar: AppBar(title: const Text('CryptoHeadlines')),
+                body: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: Consumer<ArticleDataProvider>(
+                        builder: (context, data, child) {
+                      if (data.result.isNotEmpty && data.loading == false) {
+                        return ListView.builder(
+                            itemCount: data.result.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              // return Text(data.result[index].title);
+                              return Center(
+                                  child: Card(
+                                      clipBehavior: Clip.antiAlias,
+                                      child: Column(children: [
+                                        Image.network(
+                                          data.result[index].urlToImage,
+                                          errorBuilder: (context, exception,
+                                                  stackTrack) =>
+                                              const Icon(Icons.error),
+                                          isAntiAlias: true,
+                                        ),
+                                        ListTile(
+                                          title: Text(data.result[index].title),
+                                          subtitle: Text(
+                                              data.result[index].description),
+                                        )
+                                      ])));
+                            });
+                      } else {
+                        return SizedBox(
+                            child: Center(
+                                child: Transform.scale(
+                                    scale: 4,
+                                    child: const CircularProgressIndicator())));
+                      }
+                    })))));
   }
 }
