@@ -35,6 +35,9 @@ class MyApp extends StatelessWidget {
                               // return Text(data.result[index].title);
                               return Center(
                                   child: Card(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
                                       clipBehavior: Clip.antiAlias,
                                       child: Column(children: [
                                         Image.network(
