@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
             ),
             debugShowCheckedModeBanner: false,
             home: Scaffold(
-                appBar: AppBar(title: const Text('CryptoHeadlines')),
+                appBar: AppBar(title: const Text('Top Crypto Headlines')),
                 body: Container(
                     padding: const EdgeInsets.all(8),
                     child: Consumer<ArticleDataProvider>(
