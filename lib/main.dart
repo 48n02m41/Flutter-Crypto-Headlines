@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rest_test/providers/article_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());
 
@@ -44,13 +45,20 @@ class MyApp extends StatelessWidget {
                                           data.result[index].urlToImage,
                                           errorBuilder: (context, exception,
                                                   stackTrack) =>
-                                              const Icon(Icons.error),
+                                              const Text(""),
                                           isAntiAlias: true,
                                         ),
                                         ListTile(
                                           title: Text(data.result[index].title),
                                           subtitle: Text(
                                               data.result[index].description),
+                                          trailing: IconButton(
+                                            icon: const Icon(Icons.read_more),
+                                            onPressed: () {
+                                              _launchURL(
+                                                  "" + data.result[index].url);
+                                            },
+                                          ),
                                         )
                                       ])));
                             });
@@ -63,4 +71,8 @@ class MyApp extends StatelessWidget {
                       }
                     })))));
   }
+
+  void _launchURL(String url) async => await canLaunch(url)
+      ? await launch(url, forceWebView: true, enableJavaScript: true)
+      : throw 'Could not launch $url';
 }
